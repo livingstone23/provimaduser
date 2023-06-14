@@ -9,6 +9,8 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	aws "github.com/aws/aws-lambda-go/lambda"
 	"github.com/livingstone23/provimaduser/awsgo"
+	"github.com/livingstone23/provimaduser/bd"
+	"github.com/livingstone23/provimaduser/models"
 )
 
 func main() {
@@ -28,6 +30,27 @@ func EjecutoLambda(ctx context.Context, event events.CognitoEventUserPoolsPostCo
 		return event, err
 	}
 
+	var datos models.SignUp
+
+	for row, att := range event.Request.UserAttributes {
+		switch row {
+		case "email":
+			datos.Useremail = att
+			fmt.Println("Email = " + datos.Useremail)
+		case "sub":
+			datos.UserUUID = att
+			fmt.Println("Sub = " + datos.UserUUID)
+		}
+	}
+
+	err := bd.ReadSecret()
+	if err != nil {
+		fmt.Println("Error al leer el Secret" + err.Error())
+		return event, err
+	}
+
+	err = bd.SignUp(datos)
+	return event, err
 }
 
 func ValidoParametros() bool {

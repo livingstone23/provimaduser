@@ -8,7 +8,7 @@ import (
 )
 
 var Ctx context.Context
-var cfg aws.Config
+var Cfg aws.Config
 var err error
 
 func InicializoAWS() {
