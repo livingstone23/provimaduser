@@ -3,6 +3,7 @@
 #
 # Binaries for programs and plugins
 subo.bat
+main.zip
 *.exe
 *.exe~
 *.dll
