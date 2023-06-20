@@ -5,6 +5,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/livingstone23/provimaduser/models"
+	"github.com/livingstone23/provimaduser/tools"
 )
 
 func SignUp(sig models.SignUp) error {
@@ -17,8 +18,8 @@ func SignUp(sig models.SignUp) error {
 
 	defer Db.Close()
 
-	//sentencia := "INSERT INTO users (Users_Email, User_UUID, User_DateAdd) VALUES ('" + sig.UserEmail + "','" + sig.UserUUID + "','" + tools.FechaMySQL() + "')"
-	sentencia := "insert into users(user_uuid, user_email, user_firstname, user_lastname, user_status, user_dateadd, user_dateupg)	Values('121','livingstone2','lcano','test','1','2023-01-01','2023-01-01')"
+	sentencia := "INSERT INTO users (Users_Email, User_UUID, User_DateAdd) VALUES ('" + sig.UserEmail + "','" + sig.UserUUID + "','" + tools.FechaMySQL() + "')"
+
 	fmt.Println(sentencia)
 	_, err = Db.Exec(sentencia)
 	if err != nil {
