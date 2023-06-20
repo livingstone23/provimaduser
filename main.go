@@ -21,6 +21,7 @@ func main() {
 }
 
 func EjecutoLambda(ctx context.Context, event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {
+	fmt.Println("Inicializando funcion  EjecutoLambda")
 
 	awsgo.InicializoAWS()
 
@@ -35,8 +36,8 @@ func EjecutoLambda(ctx context.Context, event events.CognitoEventUserPoolsPostCo
 	for row, att := range event.Request.UserAttributes {
 		switch row {
 		case "email":
-			datos.Useremail = att
-			fmt.Println("Email = " + datos.Useremail)
+			datos.UserEmail = att
+			fmt.Println("Email = " + datos.UserEmail)
 		case "sub":
 			datos.UserUUID = att
 			fmt.Println("Sub = " + datos.UserUUID)
