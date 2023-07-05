@@ -16,6 +16,7 @@ func SignUp(sig models.SignUp) error {
 		return err
 	}
 
+	//Confirma el cierre de la base de datos
 	defer Db.Close()
 
 	sentencia := "INSERT INTO users (User_Email, User_UUID, User_DateAdd) VALUES ('" + sig.UserEmail + "','" + sig.UserUUID + "','" + tools.FechaMySQL() + "')"
